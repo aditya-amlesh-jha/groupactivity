@@ -49,6 +49,14 @@ class Database:
         result = cursor.fetchall()
         return result
     
+    # function to delete by id
+    def deleteData(self,table_name,id):
+        cursor = self.db.cursor()
+        delete_query = f"DELETE FROM {table_name} WHERE id = %s"
+        cursor.execute(delete_query,(id,))
+        self.db.commit()
+        return "Data deleted successfully"
+
     def fetchAllData(self,table_name):
         cursor = self.db.cursor()
         fetch_query = f"SELECT * FROM {table_name}"

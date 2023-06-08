@@ -40,6 +40,23 @@ def createApp():
             result = mydb.searchData(table_name,name)
             return render_template("search.html",data=result)
         return render_template("search.html")
+    
+    # # creating a route to delete data from the database using a form
+    # @app.route('/delete',methods=['GET','POST'])
+    # def delete():
+    #     if request.method == 'POST':
+    #         id = request.form['id']
+    #         mydb.deleteData(table_name,id)
+    #         return redirect(url_for('index'))
+    #     return render_template("delete.html")
+    
+    # deleting by taking id from url and using DELETE method
+    @app.route('/delete/<id>',methods=['GET','DELETE'])
+    def deleteById(id):
+        mydb.deleteData(table_name,id)
+        return redirect(url_for('index'))
+    
+    
 
     return app
 
